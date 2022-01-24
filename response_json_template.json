@@ -1,0 +1,45 @@
+{
+    "status": "ok", 
+
+    "data": {
+      "guestToken": "p4EVBPypkEAcShRJD52GWSdVps1oetpA",  # not
+      "downloadPage": "https://gofile.io/d/oHuNtR",     #route
+      "code": "oHuNtR",
+      "parentFolder": "f0cdf4ea-eac8-4750-9286-d01f23afd827",
+      "fileId": "098cd303-9c23-4509-86e9-d97574885ac1",
+      "fileName": "Armin van Buuren Masterclass - 33 - Closing.mp4",
+      "md5": "28d7bd698be03951fe584e5ba3d06fe5",
+      "directLink": "https://srv-store2.gofile.io/download/098cd303-9c23-4509-86e9-d97574885ac1/Armin%20van%20Buuren%20Masterclass%20-%2033%20-%20Closing.mp4",
+      "info": "Direct links only work if your account is a donor account. Standard accounts will have their links redirected to the download page."
+    }
+  }
+
+* Using HTTP2, server supports multi-use
+* Connection state changed (HTTP/2 confirmed)
+* Copying HTTP/2 data in stream buffer to connection buffer after upgrade: len=0
+* Using Stream ID: 1 (easy handle 0x7fffe6ae97c0)
+> POST /uploadFile HTTP/2
+> Host: store9.gofile.io
+> user-agent: curl/7.68.0
+> accept: */*
+> content-length: 186
+> content-type: multipart/form-data; boundary=------------------------b9761c5b990a92a4
+>
+* TLSv1.3 (IN), TLS handshake, Newsession Ticket (4):
+* We are completely uploaded and fine
+* Connection state changed (MAX_CONCURRENT_STREAMS == 250)!
+< HTTP/2 200
+
+< access-control-allow-origin: *
+< content-type: application/json; charset=utf-8
+< date: Sun, 22 Aug 2021 05:38:19 GMT
+< etag: W/"219-EaSnM/utBPZNncl31TBN+oQGdfw"
+< strict-transport-security: max-age=31536000; includeSubDomains; preload
+< x-content-type-options: nosniff
+< x-frame-options: SAMEORIGIN
+< x-powered-by: Express
+< x-xss-protection: 1; mode=block
+< content-length: 537
+<
+* Connection #0 to host store9.gofile.io left intact
+{"status":"ok","data":{"guestToken":"OffpvqBnkAJAzZ318urGoAeTLs7Tz1UN","downloadPage":"https://gofile.io/d/W9REzc","code":"W9REzc","parentFolder":"3ca92459-daff-4a65-8187-8004a77032e5","fileId":"c143f1f0-5891-4ff3-af07-be3cb27bc728","fileName":"temp.txt","md5":"d41d8cd98f00b204e9800998ecf8427e","directLink":"https://srv-store4.gofile.io/download/c143f1f0-5891-4ff3-af07-be3cb27bc728/temp.txt","info":"Direct links only work if your account is a donor account. Standard accounts will have their links redirected to the download page."}}

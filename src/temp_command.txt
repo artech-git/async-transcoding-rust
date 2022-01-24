@@ -1,0 +1,54 @@
+let Uuid_string: Vec<&str> = file_name.rsplit("\\").collect();
+
+              //declare the relevant arguments to the ffprobe process
+            let ffprobe_args = ["-hide_banner", "-LogLevel fatal", "-show_error", "-show_format", "-show_streams", 
+                                "-show_programs","-show_programs", "-show_chapters", "-show_private_data", "-print_format json"];
+
+            let ffprobe_meta_data = Command::new("ffprobe")
+                            //.env("PATH","E:\\GITHUB\\RBucket\\ImageCompression\\ffmpeg-binaries\\bin\\") //provide the envoirment path to it
+                            .args(&ffprobe_args) //pass in the ffprobe args 
+                            .arg(&file_name)
+                            .output().await.expect("failed to create command"); //provide the input file name for meta data generation
+            
+
+            let local_file_name = format!("{}{}.{}" ,folder_string, Uuid_string[0], "json");
+
+             let mut log_file = match File::create(local_file_name).await { 
+                    Ok(f) => f,
+                    Err(e) => return Err(Box::new(MyError::not_found(e)))
+             };
+
+            println!("{:?}", &ffprobe_meta_data.stderr); 
+
+            match log_file.write_all(&ffprobe_meta_data.stdout).await {
+
+                Ok(f) => println!("good work data written"),
+                
+                Err(e) => return Err(Box::new(MyError::not_found(e)))
+            };
+            //log_file.metadata().permissions().set_readonly(true);
+
+            Ok(())
+
+
+//=======================================================================================================================
+
+
+// finding the hash of the file using the following function
+let hash_task = spawn_blocking( move || 
+            {
+            
+            let input = Path::new(&local_file_path);
+            let mut file = std::fs::File::open(input)?;
+            let mut hasher = Sha512::default();
+
+            std::io::copy(&mut file, &mut hasher)?;
+
+            std::io::Result::Ok(hasher.finalize())
+        } ).await?;  
+
+
+        Ok(String::from_utf8( (hash_task).unwrap_or("A_HASH_VALUE").as_slice().to_vec() )
+                    .unwrap() )
+//=======================================================================================================================
+
