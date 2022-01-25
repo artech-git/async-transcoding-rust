@@ -2,3 +2,10 @@
 /output
 /files
 /test
+/copy-src
+/target
+env
+route_path.drawio
+ffprobe_template.json
+response_json_template.json
+Cargo.lock

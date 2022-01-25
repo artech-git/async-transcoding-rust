@@ -178,11 +178,13 @@ async fn main() {
         });
     
     
-    let fetch_file = 
-        warp::path("download")
+    let fetch_file = core_route
+        .and(warp::path("download"))
         .and(warp::get())
-        .map(|| "available".to_string());
-        
+        //.and(handler::user_request_body())
+        //.and_then(|_| async {} )
+        .and(warp::path::param( ))
+        .map(  handler::file_response);       
 
         /*
     let file_serve = 
@@ -193,8 +195,8 @@ async fn main() {
 
 */
     let def_route = warp::service(
-        upload.or(check_queue).or(fetch_file) //.recover(handler::handle_rejection)
-    );
+        warp::any().or(upload).or(check_queue).or(fetch_file) );
+    //.recover(handler::handle_rejection)
 
     //------------------------------------------------------------------------------------------------
 

@@ -67,13 +67,18 @@ impl warp::Reply for FileData {
             "status": &self.status
         });
     
+        //let mut resp = Response::builder()
+
         let mut resp = warp::reply::json(&json_return_type).into_response();
-        
+          
+
+        //warp::reply::with_header(resp, "SERVER", "Rbucket");
+
         // resp.status_mut() = StatusCode::CREATED;
-        //todo fix the runtime panic issue with the header configuration 
-        let _ = resp.headers_mut().insert(SERVER, HeaderValue::from_static("Rbucket")).unwrap();
-        //let _ = resp.headers_mut().insert(ACCESS_CONTROL_ALLOW_ORIGIN, HeaderValue::from_static("*")).unwrap();
-        //let _ = resp.headers_mut().insert(CACHE_CONTROL, HeaderValue::from_static("no-cache")).unwrap();            
+     
+        let _ = resp.headers_mut().append(SERVER, HeaderValue::from_static("Rbucket"));
+        let _ = resp.headers_mut().append(ACCESS_CONTROL_ALLOW_ORIGIN, HeaderValue::from_static("*"));
+        let _ = resp.headers_mut().append(CACHE_CONTROL, HeaderValue::from_static("no-cache"));            
             
             return resp;
     }

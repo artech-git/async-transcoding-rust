@@ -86,6 +86,8 @@ pub async fn upload(
             file_ending
         );
 
+        let name = p.filename().unwrap().to_string();
+
         let value = p.stream().try_fold(
             Vec::new(), |mut vec, data|
             
@@ -170,10 +172,9 @@ pub async fn upload(
         let mut file_data = obj::FileData::new();
 
         file_data.filePath = file_name.clone(); 
-        file_data.uuid = uuid::Uuid::new_v4()
-                                .to_hyphenated()
-                                .to_string();
-
+        file_data.uuid = random_id;
+                                    
+        file_data.fileName = name;
         file_data.hash = output_hash;
 
         //response_build.file_obj = file_data.clone();
@@ -373,5 +374,9 @@ fn jwt_from_header(headers: &HeaderMap<HeaderValue>) ->
         }
 }
     
-
-
+pub fn file_response(id: String) -> 
+    impl Filter<Extract = (warp::fs::File,), Error = Rejection > + Clone 
+{
+    let local_path = format!("./output/{}", id);
+    warp::fs::file(local_path)
+}
